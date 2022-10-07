@@ -1,0 +1,67 @@
+@media (max-width: 34em) {
+  html {
+    font-size: 50%;
+  }
+
+  body {
+    max-width: 544px;
+  }
+
+  .heading-primary {
+    text-align: center;
+    border-radius: 5px;
+    font-size: 4.8rem;
+    padding: 1.2rem;
+  }
+
+  .container {
+    max-width: 350px;
+    grid-template-columns: 1fr;
+  }
+
+  form {
+    grid-template-columns: 1fr;
+    padding: 2.4rem;
+  }
+
+  .section-form label {
+    font-size: 2.4rem;
+    margin: 1.2rem;
+  }
+
+  .section-form select,
+  input {
+    font-size: 1.2rem;
+    border-radius: 5px;
+  }
+
+  .btn {
+    width: 12%;
+    height: 3.6rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: 8px;
+  }
+
+  .section-cards {
+    margin-top: 3.2rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.2rem;
+  }
+
+  .card {
+    width: 320px;
+    height: 130px;
+    padding: 1.2rem;
+  }
+
+  .card-title {
+    font-size: 3.2rem;
+  }
+
+  .card-dir {
+    font-weight: 500;
+    justify-self: end;
+  }
+}

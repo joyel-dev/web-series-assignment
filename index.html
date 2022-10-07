@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/media.css" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule=""
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script defer src="js/script.js"></script>
+
+    <title>Assignment | Joyel</title>
+  </head>
+  <body>
+    <header>
+      <h1 class="heading-primary">My Web Series</h1>
+    </header>
+    <div class="container">
+      <div class="circles">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+      </div>  
+      <section class="section-form">
+        <form id="add-form">
+          <label for="title">Title:</label>
+          <input id="title" type="text" />
+          <label for="directors">Directors:</label>
+          <input id="directors" type="text" />
+          <label for="stars">Stars:</label>
+          <input id="stars" type="text" />
+          <label for="select-platform">Streaming Platform:</label>
+          <select id="select-platform">
+            <option>Select one</option>
+            <option value="amazon-prime">Amazon Prime</option>
+            <option value="netflix">Netflix</option>
+            <option value="hulu">Hulu</option>
+            <option value="hotstar">Hotstar</option>
+            <option value="voot">Voot</option>
+          </select>
+          <button id="button" class="btn">Add</button>
+        </form>
+      </section>
+
+      <section class="section-cards"></section>
+    </div>
+  </body>
+</html>
