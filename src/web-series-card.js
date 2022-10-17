@@ -3,10 +3,10 @@ import { html, css, LitElement } from 'lit';
 export class WebSeriesCard extends LitElement {
   constructor() {
     super();
-    this.title = '';
-    this.stars = '';
-    this.director = '';
-    this.streamingPlatform = '';
+    this.title = 'Title';
+    this.stars = 'Stars';
+    this.director = 'Director';
+    this.streamingPlatform = 'Streaming';
   }
 
   static get properties() {
@@ -40,14 +40,10 @@ export class WebSeriesCard extends LitElement {
           box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
           transform-style: preserve-3d;
         }
-
-        /* Do an horizontal flip when you move the mouse over the flip box container */
         .flip-card:hover .flip-card-inner {
           transform: rotateY(180deg);
           transition: transform 0.5s;
         }
-
-        /* Position the front and back side */
         .flip-card-front,
         .flip-card-back {
           position: absolute;
@@ -56,8 +52,6 @@ export class WebSeriesCard extends LitElement {
           text-align: center;
           backface-visibility: hidden;
         }
-
-        /* Style the front side (fallback if image is missing) */
         .flip-card-front {
           background-image: radial-gradient(circle, #d6eaf8, #3498db);
           color: black;
@@ -65,7 +59,6 @@ export class WebSeriesCard extends LitElement {
           padding-top: 50px;
         }
 
-        /* Style the back side */
         .flip-card-back {
           background-color: white;
           color: black;
@@ -99,8 +92,6 @@ export class WebSeriesCard extends LitElement {
           text-align: center;
           padding-top: 50px;
         }
-
-        /* Do a verticle flip when you move the mouse over the flip box container */
         .flip-card:hover .flip-card-inner {
           transform: rotateX(180deg);
           transition: transform 0.5s;
@@ -113,7 +104,6 @@ export class WebSeriesCard extends LitElement {
           box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
           transform-style: preserve-3d;
         }
-        /* Style the back side */
         .flip-card-back {
           background-color: rgb(255, 255, 255);
           color: black;

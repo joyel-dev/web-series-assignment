@@ -1,6 +1,14 @@
-import { html, css, LitElement } from "lit";
+import { LitElement, html, css } from '@lion/core';
 
-class WebSeriesForm extends LitElement {
+export class WebSeriesForm extends LitElement {
+  static get properties() {
+    return {
+      title: { type: String },
+      stars: { type: String },
+      director: { type: String },
+      streamingPlatform: { type: String },
+    };
+  }
   static get styles() {
     return css`
       form {
@@ -48,14 +56,6 @@ class WebSeriesForm extends LitElement {
     `;
   }
 
-  static get properties() {
-    return {
-      title: { type: String },
-      director: { type: String },
-      star: { type: Number },
-    };
-    }
-
     addCard(e) {
         e.preventDefault();
         const title = this.shadowRoot.getElementById('title').value;
@@ -95,10 +95,9 @@ class WebSeriesForm extends LitElement {
           <option value="hotstar">Hotstar</option>
           <option value="voot">Voot</option>
         </select>
-        <button id="button" class="btn">Add</button>
+        <button type="submit" id="button" value="add" class="btn"  @click=${e => this.addCard(e)} >Add</button>
       </form>
     `;
   }
 }
 
-customElements.define("web-series-form", WebSeriesForm);

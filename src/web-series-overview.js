@@ -1,7 +1,8 @@
-import { html, css, LitElement } from "lit";
-import './web-series-card.js';
+import { html, css } from '@lion/core';
+import { WebSeriesCard } from './web-series-card.js';
+window.customElements.define('web-series-card', WebSeriesCard);
 
-class WebSeriesOverview extends LitElement {
+class WebSeriesOverview extends WebSeriesCard {
   static get properties() {
     return {
       cards: { type: Array },
@@ -84,25 +85,15 @@ class WebSeriesOverview extends LitElement {
   render() {
     return html`
       <div class="section-cards">
-        ${this.cards.map(
-          (i) => html`
-            <div class="card">
-              <ion-icon
-                class="delete-icon"
-                id="del-icon"
-                name="close"
-              ></ion-icon>
-              <p class="card-title">${i.title.toUpperCase()}</p>
-              <ul class="card-details">
-                <li class="card-rating">
-                  <span>${i.stars} stars</span>
-                  <ion-icon class="rating-icon" name="star-outline"></ion-icon>
-                </li>
-                <li class="card-dir">${i.directors}</li>
-                <li class="platform">${i.platform}</li>
-              </ul>
-            </div>
-          `
+        ${this.card.map(
+          item =>
+            html`<web-series-card
+            id="card"
+            title=${item.title}
+            director=${item.director}
+            stars=${item.stars}
+            streamingPlatform=${item.streamingPlatform}
+          ></web-series-card>`
         )}
       </div>
     `;
