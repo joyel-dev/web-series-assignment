@@ -1,6 +1,14 @@
 import { LitElement, html, css } from '@lion/core';
+import '@lion/button/define';
+import '@lion/select/define';
+import '@lion/form/define';
+import '@lion/input/define';
+import { loadDefaultFeedbackMessages } from '@lion/validate-messages';
+import { Required, IsString } from '@lion/form-core';
+import { ajax } from '@lion/ajax';
+import { localize, LocalizeMixin } from '@lion/localize';
 
-export class WebSeriesForm extends LitElement {
+export class WebSeriesForm extends LocalizeMixin(LitElement) {
   static get properties() {
     return {
       title: { type: String },
@@ -66,11 +74,18 @@ export class WebSeriesForm extends LitElement {
         this.dispatchEvent(
             new CustomEvent('addingcards', { detail: cardcontainer })
         );
-        this.shadowRoot.getElementById('title').value = null;
-        this.shadowRoot.getElementById('director').value = null;
-        this.shadowRoot.getElementById('stars').value = null;
-        this.shadowRoot.getElementById('streamingPlatform').value = null;
+        this.shadowRoot.getElementById('title').value = '';
+      this.shadowRoot.getElementById('director').value = '';
+      this.shadowRoot.getElementById('stars').value = '';
+      this.shadowRoot.getElementById('streamingPlatform').value = '';
     }
+
+  static get localizeNamespaces() {
+    return [
+      { 'my-web-series': locale => import(`../src/translations/${locale}.js`) },
+      ...super.localizeNamespaces,
+    ];
+  }
 
 
   constructor() {
@@ -78,26 +93,116 @@ export class WebSeriesForm extends LitElement {
   }
 
   render() {
+    loadDefaultFeedbackMessages();
+    Required.getMessage = () => '*All fields are mandatory';
+    IsString.getMessage = () => 'Numeric characters is not allowed';
+    const fetchHandler = name => {
+      ajax
+        .fetch(`${name}.json`)
+        .then(cards => cards.json())
+        .then(result => {
+          console.log(result.cards);
+        });
+    };
+
     return html`
-      <form id="add-form">
-        <label for="title">Title:</label>
-        <input id="title" type="text" />
-        <label for="directors">Directors:</label>
-        <input id="directors" type="text" />
-        <label for="stars">Stars:</label>
-        <input id="stars" type="text" />
-        <label for="select-platform">Streaming Platform:</label>
-        <select id="select-platform">
-          <option>Select one</option>
-          <option value="amazon-prime">Amazon Prime</option>
-          <option value="netflix">Netflix</option>
-          <option value="hulu">Hulu</option>
-          <option value="hotstar">Hotstar</option>
-          <option value="voot">Voot</option>
-        </select>
-        <button type="submit" id="button" value="add" class="btn"  @click=${e => this.addCard(e)} >Add</button>
-      </form>
+      <lion-form>
+        <form name="WebSeriesForm" id="web-series-form" class="container1">
+          <lion-fieldset name="lion-form">
+            <h4>
+            <label slot="label">${localize.msg('my-web-series:title')}</label> 
+            <lion-input
+              id="title"
+              type="text"
+              name="title name"
+              value=""
+              placeholder="Title Name"           
+              
+              .parser="${viewValue => String(viewValue) || undefined}"
+              .validators="${[new Required(), new IsString()]}"
+              .modelValue=${''}
+              
+            ></lion-input>
+  </h4>
+            <h4>
+            <label slot="label">${localize.msg(
+              'my-web-series:director'
+            )}</label> 
+            <lion-input
+              id="director"
+              type="text"
+              name="director name"
+              value=""
+              placeholder="Directors Name"
+              
+              .validators="${[new Required()]}"
+            ></lion-input>
+  </h4>
+  <h4>
+  <label slot="label">${localize.msg('my-web-series:stars')}</label> 
+            <lion-input
+              id="stars"
+              type="text"
+              name="stars name"
+              value=""
+              placeholder="Stars Name"
+             
+              .validators="${[new Required()]}"
+            ></lion-input>
+  </h4>
+          </lion-fieldset>
+          <h4>
+          <label slot="label">${localize.msg(
+              'my-web-series:streamingPlatform'
+            )}</label> 
+          <lion-select
+            
+            id="streamingPlatform"
+            name="streamingPlatformDropdown"
+            .validators="${[new Required()]}"
+           >
+            <select slot="input">
+              <option value="Netflix">Netflix</option>
+              <option value="Prime">Prime</option>
+              <option value="Hulu">Hulu</option>
+              <option value="Hotstar">Hotstar</option>
+              .validators="${[new Required()]}"
+            </select>
+          </lion-select>
+          </h4>
+          <div class: "submit">
+         
+          <lion-button-submit
+          
+            type="submit"
+            id="name"
+            
+            @click=${() => fetchHandler('db')}
+            
+          >
+          ${localize.msg('my-web-series:name')}
+          </lion-button-submit>
+          </div>
+        </form>
+      </lion-form>
+      <button class="button" id="id1" @click="${this.first}" >ENGLISH</button>
+      <button class="button" id="id2" @click="${this.second}" >FRENCH</button>
+      <button class="button" id="id3" @click="${this.third}" >JAPANESE</button>
     `;
   }
+  first = () => {
+    localize.locale = 'en';
+    console.log('ENGLISH');
+  };
+
+  second = () => {
+    localize.locale = 'fr';
+    console.log('FRENCH');
+  };
+
+  third = () => {
+    localize.locale = 'jp';
+    console.log('JAPANESE');
+  };
 }
 
